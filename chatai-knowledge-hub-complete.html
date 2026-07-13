@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ChatAIの便利な使い方を共有・検索できるナレッジサイトの静的HTML版">
+  <title>ChatAIナレッジ | 完全版HTML</title>
+  <style>
+    :root{--ink:#25235b;--indigo:#4b47a6;--coral:#f36f58;--orange:#ff9b54;--green:#2f8f6b;--cream:#fff8ef;--paper:#fffdf9;--muted:#716f86;--line:#e7dfd8}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}button,input{font:inherit}button,a{-webkit-tap-highlight-color:transparent}a{color:inherit;text-decoration:none}.hidden{display:none!important}.site-shell{min-height:100vh;overflow:hidden}
+    .topbar{height:76px;padding:0 max(24px,calc((100vw - 1320px)/2));display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(37,35,91,.1);background:rgba(255,253,249,.94);position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
+    .brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:650}.brand-mark{width:34px;height:34px;border-radius:10px;background:var(--green);color:#fff;display:grid;place-items:center;font:700 21px Georgia,serif}.brand b{color:var(--coral)}
+    nav{display:flex;align-items:center;gap:24px;font-size:14px;font-weight:650}nav a:hover{color:var(--coral)}.primary-link{border:1px solid var(--indigo);color:var(--indigo);border-radius:999px;padding:9px 16px;font-weight:750}.primary-link:hover{background:var(--indigo);color:#fff}
+    .hero{min-height:550px;background:var(--cream);display:grid;grid-template-columns:1.08fr .92fr;align-items:center;padding:72px max(40px,calc((100vw - 1320px)/2));position:relative}.hero:before{content:"";width:230px;height:230px;border-radius:50%;background:rgba(255,155,84,.13);position:absolute;left:-90px;bottom:-95px}.hero-copy{position:relative;z-index:1}.eyebrow{color:var(--coral);letter-spacing:.13em;font-size:12px;font-weight:800;margin:0 0 16px}.hero h1{font-size:clamp(38px,4.4vw,65px);line-height:1.25;letter-spacing:-.04em;margin:0 0 22px}.hero h1 span{color:var(--coral)}.hero-text{color:#55536c;max-width:650px;line-height:1.9;font-size:17px;margin:0 0 30px}
+    .search-box{max-width:680px;height:64px;background:#fff;border:2px solid transparent;border-radius:18px;box-shadow:0 13px 38px rgba(37,35,91,.09);display:flex;align-items:center;padding:7px 8px 7px 20px;gap:13px}.search-box:focus-within{border-color:var(--orange)}.search-box>span{font-size:29px;transform:rotate(-18deg)}.search-box input{flex:1;border:0;outline:0;min-width:0;color:var(--ink);font-size:15px}.search-box button{border:0;background:var(--indigo);color:#fff;border-radius:13px;padding:13px 25px;font-weight:750;cursor:pointer}.popular{display:flex;gap:9px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:17px}.popular button{color:var(--indigo);border:0;background:#eeecff;padding:6px 11px;border-radius:999px;cursor:pointer}
+    .hero-art{min-height:360px;position:relative;margin-left:70px}.hero-art:before{content:"";position:absolute;inset:15px 8% 0 15%;background:linear-gradient(145deg,#eeecff,#fff 63%);border-radius:50% 44% 48% 42%;transform:rotate(-8deg);box-shadow:0 24px 70px rgba(75,71,166,.13)}.bubble{position:absolute;background:#fff;padding:22px 26px;border-radius:22px;line-height:1.6;box-shadow:0 14px 34px rgba(37,35,91,.12);font-weight:650}.bubble-one{top:35px;left:0}.bubble-two{right:4%;bottom:20px;color:#55536c}.bubble-two b{color:var(--coral)}.spark{position:absolute;right:20%;top:4%;color:var(--orange);font-size:45px}.dots{position:absolute;left:30%;bottom:24%;color:var(--indigo);font-size:30px;letter-spacing:5px}
+    .latest,.knowledge{max-width:1320px;margin:0 auto;padding:68px 32px 72px}.knowledge{padding-top:0;padding-bottom:90px}.heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:26px}.heading h2{font-size:32px;margin:0;letter-spacing:-.02em}.heading a{color:var(--indigo);font-size:13px;font-weight:800}.latest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.latest-card{border:1px solid var(--line);background:#fff;border-radius:17px;padding:16px;color:inherit;text-align:left;cursor:pointer;display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:14px}.latest-card:hover,.article-card:hover{transform:translateY(-3px);border-color:transparent;box-shadow:0 14px 28px rgba(37,35,91,.1)}.latest-icon{width:58px;height:58px;border-radius:14px;display:grid;place-items:center;font:700 19px Georgia,serif}.latest-card small{color:var(--coral);font-size:10px;font-weight:800}.latest-card b{display:block;margin:5px 0;font-size:15px}.latest-card i{display:block;color:var(--muted);font-size:11px;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.latest-card strong{color:var(--indigo)}
+    .register-button{border:0;background:var(--coral);color:#fff;font-weight:800;border-radius:13px;padding:13px 19px;cursor:pointer;box-shadow:0 8px 18px rgba(243,111,88,.22)}.category-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}.category-tabs button{border:1px solid var(--line);background:#fff;color:#626075;padding:9px 15px;border-radius:999px;cursor:pointer}.category-tabs button.active,.category-tabs button:hover{background:var(--indigo);border-color:var(--indigo);color:#fff}.article-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.article-card{border:1px solid var(--line);background:#fff;border-radius:20px;overflow:hidden;padding:0;text-align:left;color:inherit;cursor:pointer;transition:.2s;display:flex;flex-direction:column}.card-visual{height:132px;display:grid;place-items:center}.t0{background:#ffe4d7}.t1{background:#e8e6ff}.t2{background:#ffedc9}.t3{background:#dff2e8}.card-visual i{font:700 38px Georgia,serif;font-style:normal}.card-content{padding:19px;display:flex;flex-direction:column;flex:1}.category-label{color:var(--coral);font-size:11px;font-weight:800}.card-content>b{margin:9px 0;font-size:18px;line-height:1.45}.card-content>span{color:#69677a;font-size:13px;line-height:1.7;flex:1}.card-content small{color:#9693a3;margin-top:18px;font-size:11px}.empty{grid-column:1/-1;padding:60px;text-align:center;background:var(--cream);border-radius:18px;display:grid;gap:8px;color:var(--muted)}.empty b{color:var(--ink)}
+    .safety{max-width:1256px;margin:0 auto 90px;border-radius:19px;background:#eeecff;display:flex;align-items:center;gap:18px;padding:23px 28px}.safety>span{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;background:var(--indigo);font-weight:800;font-size:22px}.safety div{flex:1}.safety p{color:#666381;margin:5px 0 0;font-size:13px}.safety a{color:var(--indigo);font-size:13px;font-weight:800}footer{border-top:1px solid var(--line);max-width:1320px;margin:0 auto;padding:30px 32px;display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px}
+    .export-note{max-width:1256px;margin:0 auto 24px;padding:12px 16px;border:1px solid #f0d6a3;border-radius:12px;background:#fff9e9;color:#745c28;font-size:12px;line-height:1.65}.export-note a{color:var(--indigo);font-weight:800}
+    .modal-backdrop{position:fixed;inset:0;z-index:50;padding:30px 20px;display:grid;place-items:center;background:rgba(24,22,56,.55);backdrop-filter:blur(6px);overflow-y:auto}.modal{width:min(700px,100%);max-height:calc(100vh - 60px);overflow:auto;background:#fff;border-radius:24px;padding:38px;position:relative;box-shadow:0 30px 80px rgba(20,18,50,.3)}.modal-close{position:absolute;top:18px;right:20px;border:0;background:#f3f1f5;width:35px;height:35px;border-radius:50%;cursor:pointer;color:var(--ink);font-size:22px}.modal h2{font-size:32px;margin:12px 40px 12px 0}.lead{color:var(--muted);line-height:1.75}.article-body{border-top:1px solid var(--line);margin-top:22px;padding-top:15px;line-height:1.9;color:#47455e}.tag-list{display:flex;gap:7px;flex-wrap:wrap;margin:22px 0}.tag-list span{background:#eeecff;color:var(--indigo);border-radius:999px;padding:6px 11px;font-size:12px}
+    @media(max-width:1000px){.hero{grid-template-columns:1fr;padding-top:55px}.hero-art{display:none}.latest-grid{grid-template-columns:1fr}.article-grid{grid-template-columns:repeat(2,1fr)}nav a:not(.primary-link){display:none}}
+    @media(max-width:640px){.topbar{height:66px;padding:0 17px}.brand{font-size:15px}.brand-mark{width:30px;height:30px}.primary-link{padding:8px 11px;font-size:12px}.hero{padding:45px 20px 70px}.hero-text{font-size:15px}.search-box{height:57px;padding-left:13px}.search-box button{padding:11px 13px}.latest,.knowledge{padding-left:17px;padding-right:17px}.article-grid{grid-template-columns:1fr}.heading{align-items:start;gap:18px}.register-button{display:none}.safety,.export-note{margin-left:17px;margin-right:17px}.safety{align-items:flex-start;flex-wrap:wrap}.safety a{margin-left:60px}footer{margin:0 17px;padding:25px 0;align-items:flex-start;gap:14px;flex-direction:column}.modal{padding:30px 22px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="#top"><span class="brand-mark">F</span><span>ChatAI <b>ナレッジ</b></span></a>
+      <nav aria-label="メインメニュー">
+        <a href="#knowledge">便利な使い方</a>
+        <a href="https://chatai-knowledge-hub.zumiho.chatgpt.site/guide" target="_blank" rel="noreferrer">マニュアル・利用規約</a>
+        <a class="primary-link" href="https://chatai-knowledge-hub.zumiho.chatgpt.site/" target="_blank" rel="noreferrer">＋ 記事を投稿</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">みんなの工夫を、みんなの仕事に。</p>
+          <h1>ChatAIの便利な使い方を<br><span>見つけよう、共有しよう。</span></h1>
+          <p class="hero-text">文章作成、アイデア出し、データ整理。社内で見つかった便利な使い方を、すぐ試せる形で蓄積するナレッジサイトです。</p>
+          <label class="search-box"><span aria-hidden="true">⌕</span><input id="search" aria-label="ナレッジを検索" placeholder="やりたいことやキーワードで検索"><button id="searchButton" type="button">検索</button></label>
+          <div class="popular"><span>よく検索されています</span><button data-query="メール">メール</button><button data-query="要約">要約</button><button data-query="アイデア出し">アイデア出し</button></div>
+        </div>
+        <div class="hero-art" aria-hidden="true"><div class="bubble bubble-one">“会議メモを<br>3行で要約して”</div><div class="spark">✦</div><div class="bubble bubble-two">できました！<br><b>次のアクション</b>も整理します。</div><div class="dots">•••</div></div>
+      </section>
+
+      <section class="latest">
+        <div class="heading"><div><p class="eyebrow">NEW KNOWLEDGE</p><h2>新着記事</h2></div><a href="#knowledge">すべての記事を見る →</a></div>
+        <div class="latest-grid" id="latestGrid"></div>
+      </section>
+
+      <section class="knowledge" id="knowledge">
+        <div class="heading"><div><p class="eyebrow">KNOWLEDGE LIBRARY</p><h2>便利な使い方を探す</h2></div><a class="register-button" href="https://chatai-knowledge-hub.zumiho.chatgpt.site/" target="_blank" rel="noreferrer">＋ ナレッジを登録する</a></div>
+        <div class="category-tabs" id="categoryTabs" aria-label="カテゴリで絞り込む"></div>
+        <div class="article-grid" id="articleGrid"></div>
+      </section>
+
+      <div class="export-note">このファイルは2026年7月13日時点の静的HTML書き出し版です。投稿・承認・アーカイブ・削除・画像アップロード・Discord通知は、安全なサーバー処理が必要なため、<a href="https://chatai-knowledge-hub.zumiho.chatgpt.site/" target="_blank" rel="noreferrer">本番サイト</a>で利用してください。</div>
+      <section class="safety"><span>!</span><div><b>ChatAIを安全に使うために</b><p>個人情報・機密情報は入力せず、生成された内容は必ずご自身で確認してください。</p></div><a href="https://chatai-knowledge-hub.zumiho.chatgpt.site/guide" target="_blank" rel="noreferrer">基本ルールを見る →</a></section>
+    </main>
+
+    <footer><div class="brand"><span class="brand-mark">F</span><span>ChatAI <b>ナレッジ</b></span></div><p>みんなの工夫で、仕事をもっと軽やかに。</p></footer>
+  </div>
+
+  <div class="modal-backdrop hidden" id="modalBackdrop" role="presentation">
+    <article class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="閉じる">×</button>
+      <span class="category-label" id="modalCategory"></span><h2 id="modalTitle"></h2><p class="lead" id="modalSummary"></p><div class="article-body" id="modalBody"></div><div class="tag-list" id="modalTags"></div><small id="modalMeta"></small>
+    </article>
+  </div>
+
+  <script>
+    /* 承認済み記事のみを入れる領域。書き出し時点では公開記事0件です。 */
+    const ARTICLES = [];
+    const CATEGORIES = ["すべて","文章生成","画像生成","データ分析","セキュリティ","その他"];
+    const ICONS = ["Aa","✉","✦","↗"];
+    let selectedCategory = "すべて";
+
+    const escapeHtml = (value="") => String(value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"})[c]);
+    const filteredArticles = () => {
+      const query = document.querySelector("#search").value.trim().toLowerCase();
+      return ARTICLES.filter(a => (selectedCategory === "すべて" || a.category === selectedCategory) && (!query || `${a.title} ${a.summary} ${a.content} ${a.tags}`.toLowerCase().includes(query)));
+    };
+
+    function openArticle(article) {
+      document.querySelector("#modalCategory").textContent = article.category;
+      document.querySelector("#modalTitle").textContent = article.title;
+      document.querySelector("#modalSummary").textContent = article.summary || "";
+      document.querySelector("#modalSummary").classList.toggle("hidden", !article.summary);
+      document.querySelector("#modalBody").innerHTML = String(article.content || "").split("\n").map(line => `<p>${escapeHtml(line) || "<br>"}</p>`).join("");
+      document.querySelector("#modalTags").innerHTML = String(article.tags || "").split(",").filter(Boolean).map(tag => `<span>#${escapeHtml(tag.trim())}</span>`).join("");
+      document.querySelector("#modalMeta").textContent = `${article.author || ""}　・　${String(article.createdAt || "").slice(0,10)}`;
+      document.querySelector("#modalBackdrop").classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function card(article, index, latest=false) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = latest ? "latest-card" : "article-card";
+      button.innerHTML = latest
+        ? `<span class="latest-icon t${index%4}">${ICONS[index%4]}</span><span><small>${escapeHtml(article.category)}　・　${escapeHtml(String(article.createdAt||"").slice(0,10))}</small><b>${escapeHtml(article.title)}</b><i>${escapeHtml(article.summary||"新しい便利な使い方を確認できます。")}</i></span><strong>→</strong>`
+        : `<span class="card-visual t${index%4}"><i>${ICONS[index%4]}</i></span><span class="card-content"><span class="category-label">${escapeHtml(article.category)}</span><b>${escapeHtml(article.title)}</b><span>${escapeHtml(article.summary||"")}</span><small>${escapeHtml(article.author||"")}　・　${escapeHtml(String(article.createdAt||"").slice(0,10))}</small></span>`;
+      button.addEventListener("click", () => openArticle(article));
+      return button;
+    }
+
+    function render() {
+      const latest = document.querySelector("#latestGrid");
+      const grid = document.querySelector("#articleGrid");
+      latest.replaceChildren(); grid.replaceChildren();
+      ARTICLES.slice(0,3).forEach((article,index) => latest.append(card(article,index,true)));
+      if (!ARTICLES.length) latest.innerHTML = '<div class="empty" style="grid-column:1/-1"><b>現在、公開中の新着記事はありません</b><span>承認された記事がここに表示されます。</span></div>';
+      const results = filteredArticles();
+      results.forEach((article,index) => grid.append(card(article,index,false)));
+      if (!results.length) grid.innerHTML = `<div class="empty"><b>${ARTICLES.length ? "該当するナレッジが見つかりませんでした" : "現在、承認済みの公開記事はありません"}</b><span>${ARTICLES.length ? "検索条件を変更してください。" : "投稿された記事は管理者の承認後に掲載されます。"}</span></div>`;
+    }
+
+    const tabs = document.querySelector("#categoryTabs");
+    CATEGORIES.forEach(category => {
+      const button = document.createElement("button"); button.type="button"; button.textContent=category;
+      if (category === selectedCategory) button.classList.add("active");
+      button.addEventListener("click", () => { selectedCategory=category; [...tabs.children].forEach(b=>b.classList.toggle("active",b===button)); render(); });
+      tabs.append(button);
+    });
+    document.querySelector("#search").addEventListener("input", render);
+    document.querySelector("#searchButton").addEventListener("click", () => { render(); document.querySelector("#knowledge").scrollIntoView(); });
+    document.querySelectorAll("[data-query]").forEach(button => button.addEventListener("click", () => { document.querySelector("#search").value=button.dataset.query; render(); document.querySelector("#knowledge").scrollIntoView(); }));
+    const closeModal = () => { document.querySelector("#modalBackdrop").classList.add("hidden"); document.body.style.overflow=""; };
+    document.querySelector("#modalClose").addEventListener("click", closeModal);
+    document.querySelector("#modalBackdrop").addEventListener("mousedown", event => { if(event.target===event.currentTarget) closeModal(); });
+    document.addEventListener("keydown", event => { if(event.key==="Escape") closeModal(); });
+    render();
+  </script>
+</body>
+</html>
